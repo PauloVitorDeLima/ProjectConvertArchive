@@ -11,9 +11,8 @@
  	</properties>
 
 	<dependencies>	
-    
+  
     	<!-- DEPENDENCY GSON -->
-	
 		<dependency>
 	    	<groupId>com.google.code.gson</groupId>
 	    	<artifactId>gson</artifactId>

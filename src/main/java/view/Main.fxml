@@ -6,14 +6,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="251.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+<AnchorPane prefHeight="305.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <children>
-      <Button fx:id="btArchive" defaultButton="true" layoutX="102.0" layoutY="109.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="186.0" text="Button" />
+      <Button fx:id="btArchive" defaultButton="true" layoutX="102.0" layoutY="64.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="186.0" text="Selecionar CSV" />
       <Label layoutX="59.0" layoutY="31.0" text="Selecione um arquivo CSV para converter">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtFieldPatch" layoutX="9.0" layoutY="197.0" prefHeight="25.0" prefWidth="372.0" />
+      <TextField fx:id="txtFieldPatch" layoutX="9.0" layoutY="140.0" prefHeight="25.0" prefWidth="372.0" />
+      <Button fx:id="btConvert" defaultButton="true" layoutX="102.0" layoutY="186.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="186.0" text="Converter para JSON" />
+      <ProgressBar fx:id="ProgressBar" layoutX="13.0" layoutY="261.0" prefHeight="18.0" prefWidth="372.0" progress="0.0" />
    </children>
 </AnchorPane>
