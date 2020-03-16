@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="251.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <children>
+      <Button fx:id="btArchive" defaultButton="true" layoutX="102.0" layoutY="109.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="186.0" text="Button" />
+      <Label layoutX="59.0" layoutY="31.0" text="Selecione um arquivo CSV para converter">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtFieldPatch" layoutX="9.0" layoutY="197.0" prefHeight="25.0" prefWidth="372.0" />
+   </children>
+</AnchorPane>
