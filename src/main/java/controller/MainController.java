@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,9 +11,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import com.google.gson.Gson;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -41,21 +38,23 @@ public class MainController implements Initializable {
     @FXML
     private ProgressBar ProgressBar;
     
-    private String caminhoCSV;
+    private String pathCSV;
     
 
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
 		btArchive.setOnMouseClicked((MouseEvent e)->{	
-			caminhoCSV = SelectArchiveCSV();
+			pathCSV = SelectArchiveCSV();
 		});
 		
 		btConvert.setOnMouseClicked((MouseEvent e)->{	
-			CriarArquivoJSON(caminhoCSV);
-		});
-		
-		
+			CriarArquivoJSON(pathCSV);
+			  Alert sucess = new Alert(Alert.AlertType.CONFIRMATION);
+			  sucess.setHeaderText("SUCESSO");
+			  sucess.setContentText("Arquivo convertido com sucesso");
+			  sucess.showAndWait();
+		});	
 	}
 	
 	
@@ -64,9 +63,9 @@ public class MainController implements Initializable {
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("Arquivo CSV", "*.csv"));
 		File file = fileChooser.showOpenDialog(new Stage());	
 		if(file != null) {
-			caminhoCSV = file.getAbsolutePath();
-			txtFieldPatch.setText(caminhoCSV);
-			return txtFieldPatch.toString();
+			pathCSV = file.getAbsolutePath();
+			txtFieldPatch.setText(pathCSV);
+			return pathCSV;	
 		}
 		return null;
 	}
@@ -102,15 +101,20 @@ public class MainController implements Initializable {
 	private static List<People> createPeopleList(String filePathCSV) {
 		try {
 		List<String> listFileContent = readFile(filePathCSV);
-		String[] arrayFileContent = listFileContent.toArray(new String[listFileContent.size()]);
-		List<People> listOfPeoples =  new ArrayList<People>();;
-		for (int i = 1; i < arrayFileContent.length; i++) {
+		//	List<String> listFileContent = lerArquivo(filePathCSV);
+		if(listFileContent != null) {	
 		
-			String[] tempString = removeIndefChars(arrayFileContent[i]);
-			People people = new People(tempString);
-			listOfPeoples.add(people);
+			String[] arrayFileContent = listFileContent.toArray(new String[listFileContent.size()]);
+			List<People> listOfPeoples =  new ArrayList<People>();;
+			for (int i = 1; i < arrayFileContent.length; i++) {
+			
+				String[] tempString = removeIndefChars(arrayFileContent[i]);
+				People people = new People(tempString);
+				listOfPeoples.add(people);
+			}		
+			return listOfPeoples;
 		}
-		return listOfPeoples;
+		return null;
 		
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -118,7 +122,7 @@ public class MainController implements Initializable {
 			   error.setHeaderText("ERROR");
 			   error.setContentText("ERROR DE CRIAÇÃO DO ARQUIVO JSON");
 			   error.showAndWait();
-			return null;
+			   return null;
 		}
 	}
 
@@ -138,7 +142,6 @@ public class MainController implements Initializable {
 	
 	private static String[] removeIndefChars(String notFormated) {
 
-		
 		String[] formated = notFormated.split(",");
 		
 		formated[6] = formated[6].replace("\"", "");
